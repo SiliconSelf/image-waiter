@@ -54,5 +54,7 @@ wildcard_dependencies = "warn"
 workspace = true
 
 [dependencies]
+flume = "0.11.0"
+rand = "0.8.5"
 rocket = { version = "0.5.0", features = ["json"] }
 sailfish = "0.8.3"
