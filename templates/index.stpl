@@ -1,5 +1,7 @@
 <html>
   <body>
-    <p>Hello, World!</p>
+    <% for image in &images { %>
+      <div><%= image.url %></div>
+    <% } %>
   </body>
 </html>
