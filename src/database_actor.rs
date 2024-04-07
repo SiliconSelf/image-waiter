@@ -1,24 +1,40 @@
 //! Actor that provides database connection functionality
 
-use diesel::{Connection, PgConnection};
+use diesel::{Connection, PgConnection, RunQueryDsl};
 
-use crate::configuration::APP_CONFIG;
+use crate::{configuration::APP_CONFIG, models::Image};
 
 /// An actor that provides various database functions
 pub(crate) struct DatabaseActor {
-    images: Vec<DatabaseImage>,
+    /// The connection to the postgres database
+    _connection: PgConnection,
+    /// The images retrieved from the database at startup
+    images: Vec<Image>,
 }
 
 impl DatabaseActor {
     /// Create a new database actor
     pub(crate) fn new() -> Self {
-        PgConnection::establish(APP_CONFIG.get_database_path())
-            .expect("Failed to connect to postgres database");
+        use crate::schema::images::dsl::images;
+
+        let mut connection = establish_connection();
+        let results: Vec<Image> =
+            images.load(&mut connection).expect("Error loading images");
 
         Self {
-            images: Vec::new(),
+            _connection: connection,
+            images: results,
         }
+    }
+
+    /// Return a reference to the internal `images`
+    pub(crate) fn get_images(&self) -> &Vec<Image> {
+        &self.images
     }
 }
 
-pub(crate) struct DatabaseImage;
+/// Establish a connection to the database
+fn establish_connection() -> PgConnection {
+    PgConnection::establish(APP_CONFIG.get_database_url())
+        .expect("Failed to connect to postgres database")
+}

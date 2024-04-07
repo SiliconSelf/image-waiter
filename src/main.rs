@@ -33,9 +33,9 @@ fn index(rng: &State<ImageActor>) -> SailfishResponder {
 #[rocket::main]
 #[allow(clippy::redundant_type_annotations)]
 async fn main() {
-    let _database_actor = DatabaseActor::new();
+    let database_actor = DatabaseActor::new();
     let rocket = rocket::build()
-        .manage(ImageActor::new())
+        .manage(ImageActor::new(&database_actor))
         .mount("/", rocket::routes![index]);
     rocket.launch().await.expect("Server Crashed");
 }

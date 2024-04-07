@@ -15,6 +15,9 @@ pub(crate) static APP_CONFIG: Lazy<Config> = Lazy::new(Config::new);
 pub(crate) struct Config {
     /// The path to the postgres database
     database_url: String,
+    /// How large the bounded channel between image actor and web server should
+    /// be
+    channel_size: usize,
 }
 
 impl Config {
@@ -29,5 +32,10 @@ impl Config {
     /// Get a reference to the internal `database_path`
     pub(crate) fn get_database_url(&self) -> &String {
         &self.database_url
+    }
+
+    /// Get a copy of the internal `channel_size`
+    pub(crate) fn get_channel_size(&self) -> usize {
+        self.channel_size
     }
 }
