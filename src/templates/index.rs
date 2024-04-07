@@ -8,5 +8,5 @@ use crate::image_actor::Image;
 #[derive(TemplateOnce)]
 #[template(path = "index.stpl")]
 pub(crate) struct IndexTemplate {
-    pub(crate) images: Vec<Image>
+    pub(crate) images: Vec<Image>,
 }
