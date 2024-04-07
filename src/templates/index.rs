@@ -8,5 +8,6 @@ use crate::image_actor::Image;
 #[derive(TemplateOnce)]
 #[template(path = "index.stpl")]
 pub(crate) struct IndexTemplate {
+    /// Images to display on the page
     pub(crate) images: Vec<Image>,
 }
