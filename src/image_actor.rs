@@ -22,7 +22,7 @@ impl ImageActor {
         let (tx, rx) = flume::bounded(APP_CONFIG.get_channel_size());
         let images: Vec<Image> =
             db_actor.get_images().iter().map(Image::from).collect();
-        std::thread::spawn(move || rng_thread(&tx, images));
+        std::thread::spawn(move || rng_thread(&tx, &images));
         Self {
             rx,
         }
@@ -35,7 +35,6 @@ impl ImageActor {
 }
 
 /// An in-memory representation of an Image from the database
-#[derive(Debug)]
 pub(crate) struct Image {
     /// The serial id of the image
     pub(crate) id: usize,
@@ -57,7 +56,7 @@ impl From<&crate::models::Image> for Image {
 }
 
 /// The background RNG thread that precomputes response data
-fn rng_thread(sender: &Sender<Image>, source: Vec<Image>) {
+fn rng_thread(sender: &Sender<Image>, source: &[Image]) {
     let source_size = source.len();
     let mut rng_thread = rand::thread_rng();
 

@@ -1,7 +1,7 @@
 <html>
   <body>
     <% for image in &images { %>
-      <div><%= image | dbg %></div>
+      <div><%= image.id %>: <%= image.url %></div>
     <% } %>
   </body>
 </html>
