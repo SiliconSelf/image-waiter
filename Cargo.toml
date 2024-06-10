@@ -54,7 +54,7 @@ wildcard_dependencies = "warn"
 workspace = true
 
 [dependencies]
-figment = { version = "0.10.18" }
+figment = { version = "0.10.19" }
 flume = "0.11.0"
 once_cell = "1.19.0"
 rand = "0.8.5"
