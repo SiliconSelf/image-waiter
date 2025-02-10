@@ -56,7 +56,7 @@ workspace = true
 [dependencies]
 figment = { version = "0.10.19" }
 flume = "0.11.1"
-once_cell = "1.20.2"
+once_cell = "1.20.3"
 rand = "0.8.5"
 rocket = { version = "0.5.1", features = ["json"] }
 sailfish = "0.8.3"
