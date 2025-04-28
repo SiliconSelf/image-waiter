@@ -61,4 +61,4 @@ rand = "0.9.1"
 rocket = { version = "0.5.1", features = ["json"] }
 sailfish = "0.8.3"
 serde = { version = "1.0.218", features = ["derive"] }
-diesel = { version = "2.2.5", features = ["postgres"] }
+diesel = { version = "2.2.10", features = ["postgres"] }
